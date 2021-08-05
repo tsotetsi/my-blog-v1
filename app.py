@@ -73,6 +73,7 @@ app = Flask(__name__)
 app.debug = True
 app.config['SECRET_KEY'] = 'super-secret'
 CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 jwt = JWT(app, authenticate, identity)
 

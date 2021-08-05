@@ -24,7 +24,9 @@ fetch('https://sheltered-earth-99321.herokuapp.com/auth', {
               method: 'post',
               headers: {
                 "Authorization": `jwt ${myStorage.getItem("jwt-token")}`,
-                "Access-Control-Allow-Origin": '*'
+                "Access-Control-Allow-Origin": '*',
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
               },
               body: JSON.stringify({"title": "New Blog Post 2 Title", "content": "New Blog Post 2 Content"})
         })
