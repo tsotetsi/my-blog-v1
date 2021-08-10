@@ -1,6 +1,7 @@
 import hmac
 import sqlite3
 import datetime
+import logging
 
 from flask import Flask, request, jsonify
 from flask_jwt import JWT, jwt_required, current_identity
@@ -28,6 +29,7 @@ def fetch_users():
 
 
 users = fetch_users()
+
 
 def init_user_table():
     conn = sqlite3.connect('blog.db')
@@ -77,6 +79,8 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 jwt = JWT(app, authenticate, identity)
 
+logging.getLogger('flask_cors').level = logging.DEBUG
+
 @app.route('/protected')
 @jwt_required()
 def protected():
@@ -108,13 +112,12 @@ def user_registration():
 
 @app.route('/create-blog/', methods=["POST"])
 @jwt_required()
-@cross_origin(origin="*")
 def create_blog():
     response = {}
 
     if request.method == "POST":
-        title = request.form['title']
-        content = request.form['content']
+        title = request.json['title']
+        content = request.json['content']
         date_created = datetime.datetime.now()
 
         with sqlite3.connect('blog.db') as conn:
@@ -126,7 +129,7 @@ def create_blog():
             conn.commit()
             response["status_code"] = 201
             response['description'] = "Blog post added succesfully"
-        return response
+        return response, 201
 
 
 @app.route('/get-blogs/', methods=["GET"])
