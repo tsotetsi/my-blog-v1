@@ -1,11 +1,10 @@
 import hmac
 import sqlite3
 import datetime
-import logging
 
 from flask import Flask, request, jsonify
 from flask_jwt import JWT, jwt_required, current_identity
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 
 
 class User(object):
@@ -79,12 +78,12 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 jwt = JWT(app, authenticate, identity)
 
-logging.getLogger('flask_cors').level = logging.DEBUG
 
 @app.route('/protected')
 @jwt_required()
 def protected():
     return '%s' % current_identity
+
 
 @app.route('/user-registration/', methods=["POST"])
 def user_registration():

@@ -1,5 +1,5 @@
-//fetch('https://sheltered-earth-99321.herokuapp.com/get-blogs/')
-fetch('http://localhost:5001/get-blogs/')
+fetch('https://sheltered-earth-99321.herokuapp.com/get-blogs/')
+//fetch('http://localhost:5001/get-blogs/')
   .then(response => response.json())
   .then(data => console.log(data));
 
@@ -9,8 +9,8 @@ let = {
    "password": "thapelo"
 }
 
-//fetch('https://sheltered-earth-99321.herokuapp.com/auth', {
-fetch('http:/localhost:5001/auth', {
+fetch('https://sheltered-earth-99321.herokuapp.com/auth', {
+//fetch('http:/localhost:5001/auth', {
   method: 'post',
   headers: {
     'Content-Type': 'application/json'
@@ -22,8 +22,8 @@ fetch('http:/localhost:5001/auth', {
             myStorage = window.localStorage;
             console.log(res["access_token"]);
             myStorage.setItem("jwt-token", res["access_token"]);
-              fetch('http://localhost:5001/create-blog/', {
-//            fetch('https://sheltered-earth-99321.herokuapp.com/create-blog/', {
+//              fetch('http://localhost:5001/create-blog/', {
+              fetch('https://sheltered-earth-99321.herokuapp.com/create-blog/', {
               method: 'post',
               headers: {
                 "Authorization": `jwt ${myStorage.getItem("jwt-token")}`,
