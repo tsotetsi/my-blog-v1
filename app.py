@@ -106,6 +106,8 @@ def user_registration():
             conn.commit()
             response["message"] = "success"
             response["status_code"] = 201
+            global users
+            users = fetch_users()
         return response
 
 

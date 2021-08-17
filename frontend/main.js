@@ -29,7 +29,7 @@ fetch('https://sheltered-earth-99321.herokuapp.com/auth', {
                 "Authorization": `jwt ${myStorage.getItem("jwt-token")}`,
                 "Content-Type": "application/json"
               },
-              body: JSON.stringify({"title": "New Blog Post 2 Title", "content": "New Blog Post 2 Content"})
+              body: JSON.stringify({"title": "New Blog Post 3 Title", "content": "New Blog Post 3 Content"})
         })
           .then(res => res.json())
           .then(json => console.log(json));
