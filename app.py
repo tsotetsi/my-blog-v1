@@ -108,6 +108,7 @@ def user_registration():
             response["status_code"] = 201
             global users
             users = fetch_users()
+            # Test
         return response
 
 
